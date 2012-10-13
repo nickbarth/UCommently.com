@@ -28,13 +28,19 @@
         .clear
     .main
       .container
-        .send-form
-          %form{ action: '', method: '' }
-            %fieldset
-              %label
-                Seen Funny Top Comments?<br/>
-                %input{ type: 'text', placeholder: 'eg http://www.youtube.com/watch?v=8e9zz-mU4JU', value: '' }
-              %input{ type: 'submit', value: 'Sent Them' }
+        .action-call
+          .send-form
+            %form{ action: '', method: '' }
+              %fieldset
+                %label
+                  Seen Funny Top Comments?<br/>
+                  %input{ type: 'text', placeholder: 'eg http://www.youtube.com/watch?v=8e9zz-mU4JU', value: '' }
+                %input{ type: 'submit', value: 'Sent Them' }
+          .sign-up
+            .title Want to Join In?
+            %a.button{ href: '' }
+              &nbsp;&nbsp;&nbsp;Join <em>with</em> Facebook
+          .clear
         = yield
     .clear
     .footer
