@@ -3,7 +3,7 @@
 
 ### Viral Startup
 
-[UCommently](http://ucommently.com) is a serious for real viral startup that croud sources and harvests
+[UCommently](http://ucommently.com) is a serious for real viral startup that crowd sources and harvests
 *"Funny YouTube Comments"* for *"Entertainment Purposes Only" (see GPL)*. 
 
 ### License
