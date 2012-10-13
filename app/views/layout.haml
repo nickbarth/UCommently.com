@@ -1,11 +1,17 @@
 !!! 5
 %html
   %head
-    %title UCommently - Funny YouTube Comments for Entertainment Purposes Only!
+    %title UCommently - Funny YouTube Comments
     %meta{ name: 'viewport', content: 'width=device-width, minimum-scale=0.5, maximum-scale=0.5' }/
     %link{ rel: :icon, href: to('/favicon.ico'), type: 'image/x-icon'}/
     %link{ rel: :stylesheet, type: 'text/css', href: 'https://fonts.googleapis.com/css?family=Montserrat+Alternates' }/
     %link{ rel: :stylesheet, type: 'text/css', href: to('/assets/stylesheets/normalize.css') }/
     %link{ rel: :stylesheet, type: 'text/css', href: to('/assets/stylesheets/application.css') }/
   %body
+    .header
+      %h1
+        %a.brand{ href: 'http://ucommently.com/'}
+          %span> U
+          %span> Commently
+      .tagline Funny YouTube Comments
     = yield
