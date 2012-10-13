@@ -9,30 +9,40 @@
   %body
     .header
       .container
-        %h1
-          %a.brand{ href: 'http://ucommently.com/'}
-            %span> U
-            %span> Commently
-        .tagline Funny YouTube Comments
-        .navigation
+        .navigation.rcolumn
           %ul
             %li
-              %a{ href: '#' } Home
+              %a.selected{ href: '#' } Home
           %ul
             %li
               %a{ href: '#' } Scores
+          %ul
+            %li
+              %a{ href: '#' } About
+        .lcolumn
+          %h1
+            %a.brand{ href: 'http://ucommently.com/'}
+              %span> U
+              %span> Commently
+          .tagline Funny YouTube Comments
         .clear
     .main
       .container
+        .send-form
+          %form{ action: '', method: '' }
+            %fieldset
+              %label
+                Seen a funny comment?<br/>
+                %input{ type: 'text', placeholder: 'eg http://www.youtube.com/watch?v=8e9zz-mU4JU', value: '' }
+              %input{ type: 'submit', value: ' Sent It In ' }
         = yield
     .clear
     .footer
       .container
         .lcolumn
-          .ft-copy
-            &copy; <a href='mailto:contact@ucommently.com'>UCommently</a>. All Rights Reserved.
-        .rcolumn
-          %ul.ft-nav
+          &copy; <a href='mailto:contact@ucommently.com'>UCommently</a>. All Rights Reserved. Zero affiliation with YouTube.
+        .rcolumn.navigation
+          %ul
             %li
               %a{ href: '/legal/terms-of-service' } Terms
             %li

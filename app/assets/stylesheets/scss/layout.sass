@@ -1,48 +1,10 @@
-*
-  -webkit-appearance: none
-  -moz-appearance: none
-  -webkit-appearance: none
-  -moz-appearance: none
-  -moz-box-sizing: border-box
-  -webkit-box-sizing: border-box
-  box-sizing: border-box
-  resize: none
-  outline: none
-  margin: 0
-  padding: 0
-
 html
   font-family: Helvetica
   color: rgb(51, 51, 51)
   font-size: 16px
 
-a, a:link, a:visited, a:hover, a:active
-  color: lighten(#f35, 10%)
-  text-decoration: none
-
-.clear
-  clear: both
-
-::selection
-  background: #f35
-
-::-moz-selection
-  background: #f35
-
-.lcolumn
-  width: 50%
-  float: left
-
-.rcolumn
-  width: 50%
-  float: right
-
 .header
   padding: 20px 0
-
-.container
-  margin: 0 auto
-  width: 80%
 
 a.brand
   font-family: 'Montserrat Alternates', Helvetica, cursive
@@ -57,11 +19,9 @@ a.brand
   color: #aaa
   font-style: italic
 
-.navigation
+.header .navigation
   font-size: 12px
-  background: #eee
   text-align: right
-  padding: 2px
   ul, ul li
     display: inline
   a
@@ -73,6 +33,35 @@ a.brand
     font-weight: bold
     font-family: sans-serif
     color: #aaa
+    &.selected
+      color: #555
+
+.send-form
+  width: 100%
+  background: #eee
+  background: url(/images/ytbg.png) #ebebeb repeat
+  padding: 10px
+  margin-bottom: 20px
+  label
+    font-style: italic
+    color: #999
+    font-size: 20px
+  input[type=text]
+    border: 1px solid #aaa
+    border-radius: 2px
+    width: 50%
+    font-size: 14px
+    line-height: 26px
+    padding: 0 5px
+    color: #666
+  input[type=submit]
+    background: #ddd
+    border: 1px solid #aaa
+    border-radius: 2px
+    line-height: 26px
+    font-size: 14px
+    color: #555
+
 
 .footer
   font-size: 10px
@@ -80,7 +69,7 @@ a.brand
   a, a:link, a:visited, a:hover, a:active
     text-decoration: underline
 
-.ft-nav
+.footer .navigation
   text-align: right
   li
     display: inline
