@@ -1,10 +1,24 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    activemodel (3.2.8)
+      activesupport (= 3.2.8)
+      builder (~> 3.0.0)
+    activerecord (3.2.8)
+      activemodel (= 3.2.8)
+      activesupport (= 3.2.8)
+      arel (~> 3.0.2)
+      tzinfo (~> 0.3.29)
+    activesupport (3.2.8)
+      i18n (~> 0.6)
+      multi_json (~> 1.0)
+    arel (3.0.2)
+    builder (3.0.0)
     daemons (1.1.9)
     eventmachine (1.0.0)
     haml (3.1.7)
     hike (1.2.1)
+    i18n (0.6.1)
     multi_json (1.3.6)
     rack (1.4.1)
     rack-protection (1.2.0)
@@ -25,11 +39,13 @@ GEM
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
     tilt (1.3.3)
+    tzinfo (0.3.33)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord
   haml
   sinatra
   sprock-assets
