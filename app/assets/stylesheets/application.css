@@ -1,3 +1,5 @@
 /*
+ *= require vendor/normalize
+ *= require vendor/reset
  *= require_tree ./scss
  */

@@ -5,13 +5,49 @@
     %meta{ name: 'viewport', content: 'width=device-width, minimum-scale=0.5, maximum-scale=0.5' }/
     %link{ rel: :icon, href: to('/favicon.ico'), type: 'image/x-icon'}/
     %link{ rel: :stylesheet, type: 'text/css', href: 'https://fonts.googleapis.com/css?family=Montserrat+Alternates' }/
-    %link{ rel: :stylesheet, type: 'text/css', href: to('/assets/stylesheets/normalize.css') }/
     %link{ rel: :stylesheet, type: 'text/css', href: to('/assets/stylesheets/application.css') }/
   %body
     .header
-      %h1
-        %a.brand{ href: 'http://ucommently.com/'}
-          %span> U
-          %span> Commently
-      .tagline Funny YouTube Comments
-    = yield
+      .container
+        %h1
+          %a.brand{ href: 'http://ucommently.com/'}
+            %span> U
+            %span> Commently
+        .tagline Funny YouTube Comments
+        .navigation
+          %ul
+            %li
+              %a{ href: '#' } Home
+          %ul
+            %li
+              %a{ href: '#' } Scores
+        .clear
+    .main
+      .container
+        = yield
+    .clear
+    .footer
+      .container
+        .lcolumn
+          .ft-copy
+            &copy; <a href='mailto:contact@ucommently.com'>UCommently</a>. All Rights Reserved.
+        .rcolumn
+          %ul.ft-nav
+            %li
+              %a{ href: '/legal/terms-of-service' } Terms
+            %li
+              %a{ href: '/legal/privacy-policy' } Privacy Policy
+            %li
+              %a{ href: 'mailto:contact@ucommently.com' } Contact
+        .clear
+    %script{ type: 'text/javascript', src: to('/assets/javascripts/application.js') }
+    :javascript
+      var _gaq = _gaq || []; 
+      _gaq.push(['_setAccount', '_____']);
+      _gaq.push(['_setDomainName', 'ucommently.com']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); 
+      })();

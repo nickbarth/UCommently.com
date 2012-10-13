@@ -11,8 +11,14 @@
   margin: 0
   padding: 0
 
+html
+  font-family: Helvetica
+  color: rgb(51, 51, 51)
+  font-size: 16px
+
 a, a:link, a:visited, a:hover, a:active
-  color: #35f
+  color: lighten(#f35, 10%)
+  text-decoration: none
 
 .clear
   clear: both
@@ -23,9 +29,24 @@ a, a:link, a:visited, a:hover, a:active
 ::-moz-selection
   background: #f35
 
+.lcolumn
+  width: 50%
+  float: left
+
+.rcolumn
+  width: 50%
+  float: right
+
+.header
+  padding: 20px 0
+
+.container
+  margin: 0 auto
+  width: 80%
+
 a.brand
   font-family: 'Montserrat Alternates', Helvetica, cursive
-  text-decoration: none
+  font-size: 32px
   span
     &:nth-child(odd)
       color: #f35
@@ -33,6 +54,36 @@ a.brand
       color: #000
 
 .tagline
-  font-family: Helvetica
   color: #aaa
   font-style: italic
+
+.navigation
+  font-size: 12px
+  background: #eee
+  text-align: right
+  padding: 2px
+  ul, ul li
+    display: inline
+  a
+    margin-right: 2px
+    background: #fff
+    color: rgb(51, 51, 51)
+    line-height: 30px
+    padding: 5px
+    font-weight: bold
+    font-family: sans-serif
+    color: #aaa
+
+.footer
+  font-size: 10px
+  line-height: 16px
+  a, a:link, a:visited, a:hover, a:active
+    text-decoration: underline
+
+.ft-nav
+  text-align: right
+  li
+    display: inline
+    padding: 0 0 0 5pt
+    &:first-child
+      padding: 0
