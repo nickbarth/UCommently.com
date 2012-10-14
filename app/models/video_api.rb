@@ -60,7 +60,7 @@ module VideoAPI
       return nil if thumbs.nil?
       text = html[/<p>(.*?)<\/p>/, 1]
       # this fails when the user links a time :( damn authors
-      author = html[/<a.*?>(.*?)<\//,1]
+      author = html[/yt-user-name.*?>(.*?)</,1]
       age = html[/<span dir=.ltr.>(.*?)<spa/,1]
       { text: text, author: author, age: age, thumbs: thumbs }
     end
