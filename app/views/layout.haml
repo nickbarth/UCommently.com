@@ -14,10 +14,10 @@
         .navigation.rcolumn
           %ul
             %li
-              %a.selected{ href: '#' } Home
+              %a{ href: '/', class: (request.path_info == '/') ? 'selected' : nil } Home
           %ul
             %li
-              %a{ href: '#' } About
+              %a{ href: '/about', class: (request.path_info == '/about') ? 'selected' : nil } About
         .lcolumn
           %h1
             %a.brand{ href: 'http://ucommently.com/'}

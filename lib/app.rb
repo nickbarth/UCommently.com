@@ -36,8 +36,14 @@ class SinatraApp < Sinatra::Base
     end
   end
 
+  # Home Page
   get '/' do
     haml :index
+  end
+
+  # About Page
+  get '/about' do
+    haml :about
   end
 
   # Adds the users submitted video to the database or errors out on invalid or
