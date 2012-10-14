@@ -30,11 +30,11 @@
       .container
         .action-call
           .send-form
-            %form{ action: '', method: '' }
+            %form{ action: to('/sent_comments'), method: 'post' }
               %fieldset
                 %label
                   Seen Funny Top Comments?<br/>
-                  %input{ type: 'text', placeholder: 'eg http://www.youtube.com/watch?v=8e9zz-mU4JU', value: '' }
+                  %input{ name: 'url', type: 'text', placeholder: 'eg http://www.youtube.com/watch?v=8e9zz-mU4JU', value: '' }
                 %input{ type: 'submit', value: 'Sent Them' }
           .sign-up
             .title Want to Join In?
