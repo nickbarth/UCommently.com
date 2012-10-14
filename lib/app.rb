@@ -1,28 +1,6 @@
-require 'bundler'
-Bundler.require
+require './lib/config'
 
-require 'logger'
-require 'open-uri'
-
-require './db/connection'
-Dir['./app/**/*.rb'].each { |file| require file }
-
-class SinatraApp < Sinatra::Base
-  enable :sessions
-  use Rack::Flash
-  before { ActiveRecord::Base.verify_active_connections! }
-  after  { ActiveRecord::Base.clear_active_connections! }
-
-  configure :development do
-    use SprockAssets
-    ActiveRecord::Base.logger = Logger.new(STDOUT)
-  end
-
-  configure do
-    set :root, File.expand_path(File.join(File.dirname(__FILE__), '../'))
-    set :views, 'app/views'
-  end
-
+class SinatraApp
   helpers do
     # Returns the current user if non are logged in it will return an anonymouse
     # user for use with submitting videos.
@@ -83,5 +61,30 @@ class SinatraApp < Sinatra::Base
 
   get '/videos/:title/:id' do
     # TODO video.haml
+  end
+
+  # Redirects the user to a Facebook Login.
+  get '/facebook_login' do
+    redirect GraphAPI.auth_url
+  end
+
+  # Creates or Finds a user by their facebook_id and logs them in.
+  get '/facebook_callback' do
+    fb_user = GraphAPI.fetch_user(params[:code])
+    photo = GraphAPI.fetch_thumbnail(fb_user['access_token'])
+    @current_user = User.find_or_create_by_facebook_id fb_user[:id],
+      name:         fb_user[:name],
+      image:        photo,
+      access_token: fb_user[:access_token]
+    session[:user_id] = current_user.id
+    flash[:notice] = 'You are now signed in! :)'
+    redirect to('/')
+  end
+
+  # Signs the user out of this site and out of Facebook as per their TOS.
+  get '/logout' do
+    access_token = current_user.access_token
+    session.clear
+    redirect "https://www.facebook.com/logout.php?next=http%3A%2F%2Fucommently.com%2F&access_token=#{access_token}"
   end
 end

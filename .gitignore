@@ -1,0 +1,5 @@
+.sass-cache
+bin/
+lib/fbsecret.rb
+public/assets/javascripts/*.js
+public/assets/stylesheets/*.css

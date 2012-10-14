@@ -37,7 +37,7 @@
                 %input{ type: 'submit', value: 'Send Them' }
           .sign-up
             .title Want to Join In?
-            %a.button{ href: '' }
+            %a.button{ href: to('/facebook_login') }
               &nbsp;&nbsp;&nbsp;Join <em>with</em> Facebook
           .clear
         = yield
@@ -53,7 +53,7 @@
             %li
               %a{ href: '#' } Privacy Policy
             %li
-              %a{ href: 'mailto:contact@ucommently.com' } Contact
+              %a{ href: 'mailto:nick@nickbarth.ca' } Contact
         .clear
     %script{ type: 'text/javascript', src: to('http://code.jquery.com/jquery-1.8.2.min.js') }
     %script{ type: 'text/javascript', src: to('/assets/javascripts/application.js') }
