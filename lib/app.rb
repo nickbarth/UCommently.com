@@ -8,6 +8,8 @@ require './db/connection'
 Dir['./app/**/*.rb'].each { |file| require file }
 
 class SinatraApp < Sinatra::Base
+  enable :sessions
+  use Rack::Flash
   before { ActiveRecord::Base.verify_active_connections! }
   after  { ActiveRecord::Base.clear_active_connections! }
 
@@ -21,6 +23,12 @@ class SinatraApp < Sinatra::Base
     set :views, 'app/views'
   end
 
+  helpers do
+    def videos
+      @videos ||= Video.all
+    end
+  end
+
   get '/' do
     haml :index
   end
@@ -31,8 +39,10 @@ class SinatraApp < Sinatra::Base
     video.user_id = 1
     if video.save
       # redirect to(video.url)
+      flash[:notice] = 'Your video was successfully sent!'
       redirect to('/')
     else
+      flash[:notice] = 'It looks like the video you sent was invalid or did not any have top comments.'
       redirect back
     end
   end

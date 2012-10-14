@@ -18,7 +18,7 @@ module VideoAPI
     image = get_image(url)
     { title: title, image: image, url: url, top_comments: top_comments }
   rescue
-    false
+    {}
   end
 
   private
@@ -59,6 +59,7 @@ module VideoAPI
       thumbs = html[/data-score="(.*?)"/,1]
       return nil if thumbs.nil?
       text = html[/<p>(.*?)<\/p>/, 1]
+      # this fails when the user links a time :( damn authors
       author = html[/<a.*?>(.*?)<\//,1]
       age = html[/<span dir=.ltr.>(.*?)<spa/,1]
       { text: text, author: author, age: age, thumbs: thumbs }
