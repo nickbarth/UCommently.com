@@ -20,4 +20,9 @@ class SinatraApp < Sinatra::Base
   get '/' do
     haml :index
   end
+
+  post '/add_video' do
+
+
+  end
 end
