@@ -13,9 +13,12 @@
   - videos.each do |video|
     .video
       .votes
-        .up-vote &#9650;
-        .count 37
-        .down-vote &#9660;
+        .vote
+          .up-vote<
+            %a{ href: "send_vote/up/#{video.url_title}/#{video.id}" } &#9650;
+          .count<= video.score
+          .down-vote<
+            %a{ href: "send_vote/down/#{video.url_title}/#{video.id}" } &#9660;
       .video-block
         %a.video-title{ href: video.url }= video.title
         .video-image
@@ -29,13 +32,13 @@
                 .comment-data
                   %span.user= comment[:author]
                   %span.date= comment[:age]
-                  %span.thumbs #{comment[:thumbs]} <img src='#{to('/images/thumb.png')}'>
+                  %span.thumbs #{comment[:thumbs]} <img src="#{to('/images/thumb.png')}">
         .clear
       .sent-by
         .sent-info
           .user Sent in by <a href="#">Nick Barth</a>
           %img.photo{ src: 'https://graph.facebook.com/NickBarth2.0/picture' }
-          .thumbs 100 <img src='#{to('/images/thumb.png')}'>
+          .thumbs 100 <img src="#{to('/images/thumb.png')}">
           .sends <b>1</b> <em>u</em>Comment
           .clear
       .clear

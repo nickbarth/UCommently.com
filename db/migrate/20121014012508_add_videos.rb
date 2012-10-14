@@ -4,8 +4,9 @@ class AddVideos < ActiveRecord::Migration
       t.integer :user_id, null: false
       t.string  :title, null: false, default: ''
       t.string  :image, null: false, default: ''
-      t.string  :url, null: false, default: ''
+      t.string  :url, null: false, default: '', unique: true
       t.text    :top_comments, null: false, default: ''
+      t.integer :score, null: false, default: 0
 
       t.timestamps
     end

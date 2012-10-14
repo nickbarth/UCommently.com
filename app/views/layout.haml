@@ -17,9 +17,6 @@
               %a.selected{ href: '#' } Home
           %ul
             %li
-              %a{ href: '#' } Scores
-          %ul
-            %li
               %a{ href: '#' } About
         .lcolumn
           %h1
@@ -32,7 +29,7 @@
       .container
         .action-call
           .send-form
-            %form{ action: to('/sent_comments'), method: 'post' }
+            %form{ action: to('/send_comments'), method: 'post' }
               %fieldset
                 %label
                   Seen Funny Top Comments?<br/>
@@ -52,9 +49,9 @@
         .rcolumn.navigation
           %ul
             %li
-              %a{ href: '/legal/terms-of-service' } Terms
+              %a{ href: '#' } Terms
             %li
-              %a{ href: '/legal/privacy-policy' } Privacy Policy
+              %a{ href: '#' } Privacy Policy
             %li
               %a{ href: 'mailto:contact@ucommently.com' } Contact
         .clear

@@ -47,7 +47,7 @@ module VideoAPI
       comment_text = html.gsub(/\s/, ' ')
       comment_text = comment_text[/Top Comments.*comments-section/]
       comment_sections = comment_text.split('comment yt-tile-default')
-      comment_sections.map!{|section| parse_comments(section)}.compact![0..1]
+      comment_sections.map!{|section|parse_comments(section)}.compact!.sort_by!{|x|x[:thumbs]}[0..1]
     end
 
     # Private - Parses an HTML comment section of text.
