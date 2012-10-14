@@ -2,6 +2,7 @@ require 'bundler'
 Bundler.require
 
 require 'logger'
+require 'open-uri'
 
 class SinatraApp < Sinatra::Base
   before { ActiveRecord::Base.verify_active_connections! }
