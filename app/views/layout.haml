@@ -36,9 +36,17 @@
                   %input{ name: 'url', type: 'text', placeholder: 'eg http://www.youtube.com/watch?v=8e9zz-mU4JU', value: '' }
                 %input{ type: 'submit', value: 'Send Them' }
           .sign-up
-            .title Want to Join In?
-            %a.button{ href: to('/facebook_login') }
-              &nbsp;&nbsp;&nbsp;Join <em>with</em> Facebook
+            - if current_user.id == 1
+              .title Want to Join In?
+              %a.button{ href: to('/facebook_login') }
+                &nbsp;&nbsp;&nbsp;Join <em>with</em> Facebook
+            - else
+              .infobox
+                .title Welcome back, #{current_user.name}!
+                %img.photo{ src: current_user.image }
+                .thumbs #{current_user.score} <img src="#{to('/images/thumb.png')}">
+                .sends <b>#{current_user.videos_count}</b> <em>u</em>Comment
+                .clear
           .clear
         = yield
     .clear
@@ -48,6 +56,9 @@
           &copy; <a href='mailto:contact@ucommently.com'>UCommently</a>. All Rights Reserved. Zero affiliation with YouTube.
         .rcolumn.navigation
           %ul
+            - if current_user.id != 1
+              %li
+                %a{ href: to('/logout') } Logout
             %li
               %a{ href: '#' } Terms
             %li

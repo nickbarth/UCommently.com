@@ -29,9 +29,8 @@ class SinatraApp
   post '/send_comments' do
     options = VideoAPI.fetch(params[:url])
     video = Video.new(options)
-    video.user_id = 1
+    video.user = current_user
     if video.save
-      # redirect to(video.url)
       flash[:notice] = 'Your video was successfully sent! :)'
       redirect to('/')
     else
@@ -45,22 +44,20 @@ class SinatraApp
     vote = video.votes.find_or_create_by_user_ip(request.ip)
     # Remove original score
     video.score -= vote.score
+    video.user.score -= vote.score
     # Calculate new score
     vote.set_score(params[:vote])
     # Update video score
     video.score += vote.score
+    video.user.score += vote.score
 
-    if vote.score != 0 and vote.save and video.save
+    if vote.score != 0 and vote.save and video.save and video.user.save
       flash[:notice] = 'Your vote was successful. :)'
     else
       flash[:notice] = 'Your vote was invalid. :('
     end
 
     redirect back
-  end
-
-  get '/videos/:title/:id' do
-    # TODO video.haml
   end
 
   # Redirects the user to a Facebook Login.
@@ -72,10 +69,10 @@ class SinatraApp
   get '/facebook_callback' do
     fb_user = GraphAPI.fetch_user(params[:code])
     photo = GraphAPI.fetch_thumbnail(fb_user['access_token'])
-    @current_user = User.find_or_create_by_facebook_id fb_user[:id],
-      name:         fb_user[:name],
+    @current_user = User.find_or_create_by_facebook_id fb_user['id'],
+      name:         fb_user['name'],
       image:        photo,
-      access_token: fb_user[:access_token]
+      access_token: fb_user['access_token']
     session[:user_id] = current_user.id
     flash[:notice] = 'You are now signed in! :)'
     redirect to('/')
@@ -83,8 +80,12 @@ class SinatraApp
 
   # Signs the user out of this site and out of Facebook as per their TOS.
   get '/logout' do
-    access_token = current_user.access_token
+    access_token = current_user.access_token rescue false
     session.clear
-    redirect "https://www.facebook.com/logout.php?next=http%3A%2F%2Fucommently.com%2F&access_token=#{access_token}"
+    if access_token
+      redirect "https://www.facebook.com/logout.php?next=http%3A%2F%2Fucommently.com%2F&access_token=#{access_token}"
+    else
+      redirect to('/')
+    end
   end
 end

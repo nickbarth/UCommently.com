@@ -4,6 +4,7 @@ class Video < ActiveRecord::Base
   serialize :top_comments, Array
   default_scope order: 'created_at desc'
   validates :url, uniqueness: true
+  validates_presence_of :title
 
   # Returns the URL to a video in relative format.
   # eg '/videos/some-title/42'

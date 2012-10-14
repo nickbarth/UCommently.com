@@ -36,9 +36,9 @@
         .clear
       .sent-by
         .sent-info
-          .user Sent in by <a href="#">Nick Barth</a>
-          %img.photo{ src: 'https://graph.facebook.com/NickBarth2.0/picture' }
-          .thumbs 100 <img src="#{to('/images/thumb.png')}">
-          .sends <b>1</b> <em>u</em>Comment
+          .user Sent in by <a href="#">#{video.user.name}</a>
+          %img.photo{ src: video.user.image }
+          .thumbs #{video.user.score} <img src="#{to('/images/thumb.png')}">
+          .sends <b>#{video.user.videos_count}</b> <em>u</em>Comment
           .clear
       .clear
