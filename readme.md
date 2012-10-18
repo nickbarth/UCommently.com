@@ -7,4 +7,4 @@
 *"Funny YouTube Comments"* for *"Entertainment Purposes Only" (see GPL)*.
 
 ### License
-WTFPL &copy; 2012 Nick Barth
+MIT &copy; 2012 Nick Barth
