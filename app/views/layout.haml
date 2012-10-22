@@ -14,10 +14,10 @@
         .navigation.rcolumn
           %ul
             %li
-              %a{ href: '/', class: (request.path_info == '/') ? 'selected' : nil } Home
+              %a{ href: '/', class: current_page?('/', true) } Home
           %ul
             %li
-              %a{ href: '/about', class: (request.path_info == '/about') ? 'selected' : nil } About
+              %a{ href: '/about', class: current_page?('/about') } About
         .lcolumn
           %h1
             %a.brand{ href: 'http://ucommently.com/'}
@@ -64,7 +64,7 @@
             %li
               %a{ href: '#' } Privacy Policy
             %li
-              %a{ href: 'mailto:nick@nickbarth.ca' } Contact
+              %a{ href: 'mailto:contact@ucommently.com' } Contact
         .clear
     %script{ type: 'text/javascript', src: to('http://code.jquery.com/jquery-1.8.2.min.js') }
     %script{ type: 'text/javascript', src: to('/assets/javascripts/application.js') }

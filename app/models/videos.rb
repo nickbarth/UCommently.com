@@ -2,7 +2,6 @@ class Video < ActiveRecord::Base
   belongs_to :user, counter_cache: true
   has_many :votes
   serialize :top_comments, Array
-  default_scope order: 'created_at desc'
   validates :url, uniqueness: true
   validates_presence_of :title
 

@@ -10,12 +10,30 @@ class SinatraApp
 
     # Returns all videos ordered by their created_at dates.
     def videos
-      @videos ||= Video.all
+      @videos ||= Video.includes(:user).order('created_at desc')
+    end
+
+    # Checks main navigation for current page
+    def current_page?(page, homepage=false)
+      return request.path_info != '/about' ? 'selected' : nil if homepage
+      request.path_info == page ? 'selected' : nil
     end
   end
 
   # Home Page
   get '/' do
+    haml :index
+  end
+
+  # Sort videos by best score
+  get '/popular' do
+    @videos = Video.includes(:user).order('score desc')
+    haml :index
+  end
+
+  # Sort videos by worst score
+  get '/worst' do
+    @videos = Video.includes(:user).order('score asc')
     haml :index
   end
 
@@ -27,7 +45,7 @@ class SinatraApp
   # Adds the users submitted video to the database or errors out on invalid or
   # duplicate video submissions.
   post '/send_comments' do
-    options = VideoAPI.fetch(params[:url])
+    options = YouTubeAPI.fetch(params[:url])
     video = Video.new(options)
     video.user = current_user
     if video.save
@@ -67,12 +85,11 @@ class SinatraApp
 
   # Creates or Finds a user by their facebook_id and logs them in.
   get '/facebook_callback' do
-    fb_user = GraphAPI.fetch_user(params[:code])
-    photo = GraphAPI.fetch_thumbnail(fb_user['access_token'])
-    @current_user = User.find_or_create_by_facebook_id fb_user['id'],
-      name:         fb_user['name'],
-      image:        photo,
-      access_token: fb_user['access_token']
+    fuser = GraphAPI.new(false, params[:code])
+    @current_user = User.find_or_create_by_facebook_id   fuser.id,
+                                           name:         fuser.name,
+                                           image:        fuser.thumbnail,
+                                           access_token: fuser.access_token
     session[:user_id] = current_user.id
     flash[:notice] = 'You are now signed in! :)'
     redirect to('/')
@@ -80,12 +97,13 @@ class SinatraApp
 
   # Signs the user out of this site and out of Facebook as per their TOS.
   get '/logout' do
-    access_token = current_user.access_token rescue false
-    session.clear
-    if access_token
-      redirect "https://www.facebook.com/logout.php?next=http%3A%2F%2Fucommently.com%2F&access_token=#{access_token}"
+    target_url = if current_user.access_token.empty?
+      to('/')
     else
-      redirect to('/')
+      "https://www.facebook.com/logout.php?next=" +
+      "http%3A%2F%2Fucommently.com%2F&access_token=#{current_user.access_token}"
     end
+    session.clear
+    redirect target_url
   end
 end

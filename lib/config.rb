@@ -4,9 +4,9 @@ Bundler.require
 require 'logger'
 require 'open-uri'
 require './db/connection'
-require './lib/fbsecret'
 
 Dir['./app/**/*.rb'].each { |file| require file }
+Dir['./lib/extensions/*.rb'].each { |file| require file }
 
 class SinatraApp < Sinatra::Base
   before { ActiveRecord::Base.verify_active_connections! }
@@ -22,10 +22,12 @@ class SinatraApp < Sinatra::Base
     use Rack::Flash
     set :root, File.expand_path(File.join(File.dirname(__FILE__), '../'))
     set :views, 'app/views'
-    GraphAPI.config app_secret:   APP_SECRET,
-                    client_id:    CLIENT_ID,
-                    callback_url: 'http://ucommently.com/facebook_callback',
-                    access_scope: [:offline_access],
-                    user_fields:  [:id, :picture, :name]
+    GraphAPI.config do
+      app_secret   APP_SECRET
+      client_id    CLIENT_ID
+      callback_url 'http://ucommently.com/facebook_callback'
+      access_scope [:offline_access]
+      user_fields  [:id, :picture, :name]
+    end
   end
 end
