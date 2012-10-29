@@ -16,8 +16,12 @@ prod_start:
 	thin start -S $(SOCKET) -l ./logs/server.log -P ./logs/pid.log -e production -s 1
 
 prod_stop:
-	rm logs/* 2>/dev/null; true
+	rm -rf logs/*
 
 prod_restart: prod_stop prod_start
+
+deploy:
+	rsync -avz --exclude '.git' . $(PROD_SERVER):$(PATH)
+	ssh $(PROD_SERVER) 'cd $(PATH); make prod_restart'
 
 default: server
