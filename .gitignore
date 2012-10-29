@@ -1,7 +1,8 @@
 .sass-cache
 bin/
-lib/fbsecret.rb
+lib/extensions/fbsecret.rb
 public/assets/javascripts/*.js
 public/assets/stylesheets/*.css
 logs/
 db/database.sqlite
+conf/
