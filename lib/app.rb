@@ -57,24 +57,14 @@ class SinatraApp
     end
   end
 
+  # Records a vote for a particular video.
   get '/send_vote/:vote/:title/:video_id' do
     video = Video.find(params[:video_id])
-    vote = video.votes.find_or_create_by_user_ip(request.ip)
-    # Remove original score
-    video.score -= vote.score
-    video.user.score -= vote.score
-    # Calculate new score
-    vote.set_score(params[:vote])
-    # Update video score
-    video.score += vote.score
-    video.user.score += vote.score
-
-    if vote.score != 0 and vote.save and video.save and video.user.save
+    if video.record_vote(request.ip)
       flash[:notice] = 'Your vote was successful. :)'
     else
       flash[:notice] = 'Your vote was invalid. :('
     end
-
     redirect back
   end
 
@@ -85,11 +75,8 @@ class SinatraApp
 
   # Creates or Finds a user by their facebook_id and logs them in.
   get '/facebook_callback' do
-    fuser = GraphAPI.new(false, params[:code])
-    @current_user = User.find_or_create_by_facebook_id   fuser.id,
-                                           name:         fuser.name,
-                                           image:        fuser.thumbnail,
-                                           access_token: fuser.access_token
+    facebook_user = GraphAPI.new(false, params[:code])
+    @current_user = User.fetch_user(facebook_user)
     session[:user_id] = current_user.id
     flash[:notice] = 'You are now signed in! :)'
     redirect to('/')

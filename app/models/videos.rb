@@ -15,4 +15,21 @@ class Video < ActiveRecord::Base
   def url_title
     title.downcase.gsub(' ', '-').gsub(/[^A-Za-z0-9-]/, '') 
   end
+
+  # Create a new vote and record the updated score.
+  #
+  # Returns true if the vote was successful.
+  def record_vote(request_ip)
+    vote = video.votes.find_or_create_by_user_ip(request_ip)
+    # Remove original score
+    score -= vote.score
+    user.score -= vote.score
+    # Calculate new score
+    vote.set_score(params[:vote])
+    # Update video score
+    score += vote.score
+    user.score += vote.score
+    # Return true if vote was successful
+    return score != 0 and vote.save and video.save and user.save
+  end
 end
