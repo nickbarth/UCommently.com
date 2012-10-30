@@ -11,12 +11,14 @@ module YouTubeAPI
   # URL fails or the Top Comments section cannot be found it returns false.
   # in the form of { title: '', image: '', url: '', top_comments: {} }
   def fetch(url)
+    raise 'Invalid URL' if url[/http:\/\/www.youtube.com\//].nil?
     html = open(url).read
-    title = get_title(html)
-    top_comments = get_comments(html)
-    url = get_uri(html)
-    image = get_image(url)
-    { title: title, image: image, url: url, top_comments: top_comments }
+    {
+      title:        get_title(html),
+      image:        get_image(url),
+      url:          get_uri(html),
+      top_comments: get_comments(html)
+    }
   rescue
     {}
   end
