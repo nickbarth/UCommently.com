@@ -26,7 +26,7 @@ GEM
     eventmachine (1.0.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    graph-api (0.9.9)
+    graph-api (1.0.0)
       json
       rake
       rest-client

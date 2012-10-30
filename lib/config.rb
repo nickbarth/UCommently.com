@@ -26,6 +26,7 @@ class SinatraApp < Sinatra::Base
       app_secret   APP_SECRET
       client_id    CLIENT_ID
       callback_url 'http://ucommently.com/facebook_callback'
+      logout_url   'http://ucommently.com/'
       access_scope [:offline_access]
       user_fields  [:id, :picture, :name]
     end

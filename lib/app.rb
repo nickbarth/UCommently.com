@@ -100,8 +100,7 @@ class SinatraApp
     target_url = if current_user.access_token.empty?
       to('/')
     else
-      "https://www.facebook.com/logout.php?next=" +
-      "http%3A%2F%2Fucommently.com%2F&access_token=#{current_user.access_token}"
+      current_user.logout_url
     end
     session.clear
     redirect target_url
