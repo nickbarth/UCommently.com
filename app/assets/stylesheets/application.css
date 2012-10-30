@@ -1,4 +1,5 @@
 /*
+ *= require vendor/fonts
  *= require vendor/normalize
  *= require vendor/reset
  *= require_tree ./scss
