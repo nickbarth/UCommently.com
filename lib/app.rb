@@ -60,7 +60,7 @@ class SinatraApp
   # Records a vote for a particular video.
   get '/send_vote/:vote/:title/:video_id' do
     video = Video.find(params[:video_id])
-    if video.record_vote(request.ip)
+    if video.record_vote(request.ip, params[:vote])
       flash[:notice] = 'Your vote was successful. :)'
     else
       flash[:notice] = 'Your vote was invalid. :('
