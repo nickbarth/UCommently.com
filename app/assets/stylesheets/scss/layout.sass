@@ -76,6 +76,12 @@ a.brand
 .send-form
   float: left
   width: 80%
+  ::-webkit-input-placeholder
+    font-size: 18px
+    color: #ddd
+  :-moz-placeholder
+    font-size: 18px
+    color: #ddd
   label
     font-style: italic
     color: #999
@@ -87,12 +93,15 @@ a.brand
     width: 80%
     font-size: 14px
     line-height: 30px
+    height: 30px
+    padding: 0 5px
     color: #666
   input[type=submit]
     background: #ddd
     border: 1px solid #ccc
     border-radius: 2px
     line-height: 30px
+    height: 30px
     font-size: 14px
     color: #777
     padding: 0 8px
