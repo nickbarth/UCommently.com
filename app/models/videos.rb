@@ -21,7 +21,6 @@ class Video < ActiveRecord::Base
   # Returns true if the vote was successful.
   def record_vote(request_ip, rating)
     vote = self.votes.find_or_create_by_user_ip(request_ip)
-    puts "vote --original score #{self.score} ||| #{rating}"
     # Remove original score
     self.score -= vote.score
     self.user.score -= vote.score
@@ -30,7 +29,6 @@ class Video < ActiveRecord::Base
     # Update video score
     self.score += vote.score
     self.user.score += vote.score
-    puts "vote --new score #{self.score} ||| #{vote.score}"
     # Return true if vote was successful
     return (vote.score != 0 and vote.save and self.save and self.user.save)
   end
