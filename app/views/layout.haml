@@ -37,7 +37,7 @@
           .sign-up
             - if current_user.id == 1
               .title Want to Join In?
-              %a.button{ href: to('/facebook_login') }
+              %a.button{ href: to('/facebook_login'), 'data-no-turbolink' => true }
                 &nbsp;&nbsp;&nbsp;Join <em>with</em> Facebook
             - else
               .infobox

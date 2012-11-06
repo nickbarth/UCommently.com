@@ -87,7 +87,7 @@ class SinatraApp
     target_url = if current_user.access_token.empty?
       to('/')
     else
-      current_user.logout_url
+      GraphAPI.new(current_user.access_token).logout_url
     end
     session.clear
     redirect target_url
