@@ -57,7 +57,7 @@
           %ul
             - if current_user.id != 1
               %li
-                %a{ href: to('/logout') } Logout
+                %a{ href: to('/logout'), 'data-no-turbolink' => true } Logout
             %li
               %a{ href: '#' } Terms
             %li
