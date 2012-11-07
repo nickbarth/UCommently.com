@@ -1,4 +1,4 @@
-# Anonymous Default User
+# Default User
 User.create facebook_id:  '0',
             name:         'Anonymous',
             image:        'http://ucommently.com/images/anonymous.png',
