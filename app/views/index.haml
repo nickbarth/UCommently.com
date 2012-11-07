@@ -15,10 +15,10 @@
       .votes
         .vote
           .up-vote<
-            %a{ href: "send_vote/up/#{video.url_title}/#{video.id}", 'data-no-turbolink' => true } &#9650;
+            %a{ href: "send_vote/up/#{video.url_title}/#{video.id}" } &#9650;
           .count<= video.score
           .down-vote<
-            %a{ href: "send_vote/down/#{video.url_title}/#{video.id}", 'data-no-turbolink' => true } &#9660;
+            %a{ href: "send_vote/down/#{video.url_title}/#{video.id}" } &#9660;
       .video-block
         %a.video-title{ href: video.url }= video.title
         .video-image
