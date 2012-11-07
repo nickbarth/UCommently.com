@@ -2,7 +2,7 @@ require './lib/config'
 
 class SinatraApp
   helpers do
-    # Returns the current user if non are logged in it will return an anonymouse
+    # Returns the current user if non are logged in it will return an anonymous
     # user for use with submitting videos.
     def current_user
       @current_user ||= User.find(session[:user_id] || 1)
@@ -13,7 +13,7 @@ class SinatraApp
       @videos ||= Video.includes(:user).order('created_at desc')
     end
 
-    # Checks main navigation for current page
+    # Checks main navigation for current page.
     def current_page?(page, homepage=false)
       return request.path_info != '/about' ? 'selected' : nil if homepage
       request.path_info == page ? 'selected' : nil
@@ -21,25 +21,26 @@ class SinatraApp
   end
 
   # Home Page
+  # Sort videos by newest descending.
   get '/' do
-    haml :index
-  end
-
-  # Sort videos by best score
-  get '/popular' do
-    @videos = Video.includes(:user).order('score desc')
-    haml :index
-  end
-
-  # Sort videos by worst score
-  get '/worst' do
-    @videos = Video.includes(:user).order('score asc')
     haml :index
   end
 
   # About Page
   get '/about' do
     haml :about
+  end
+
+  # Sort videos by best score.
+  get '/popular' do
+    @videos = Video.includes(:user).order('score desc')
+    haml :index
+  end
+
+  # Sort videos by worst score.
+  get '/worst' do
+    @videos = Video.includes(:user).order('score asc')
+    haml :index
   end
 
   # Adds the users submitted video to the database or errors out on invalid or
