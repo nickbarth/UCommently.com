@@ -12,7 +12,6 @@ prod_start:
 	mkdir ./logs/ 2>/dev/null; true
 	mkdir -p public/assets/javascripts/; true
 	mkdir -p public/assets/stylesheets/; true
-	rake assets:compile; true
 	thin start -S $(SOCKET) -l ./logs/server.log -P ./logs/pid.log -e production -s 1
 
 prod_stop:

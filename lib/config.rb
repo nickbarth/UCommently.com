@@ -13,13 +13,13 @@ class SinatraApp < Sinatra::Base
   after  { ActiveRecord::Base.clear_active_connections! }
 
   configure :development do
-    use SprockAssets
     ActiveRecord::Base.logger = Logger.new(STDOUT)
   end
 
   configure do
     enable :sessions
     use Rack::Flash
+    use SprockAssets
     set :root, File.expand_path(File.join(File.dirname(__FILE__), '../'))
     set :views, 'app/views'
     GraphAPI.config do
